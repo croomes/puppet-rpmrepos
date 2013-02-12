@@ -4,7 +4,7 @@
 #   Configure the proper repositories and import GPG keys
 #
 # Requires:
-#   You should probably be on an Enterprise Linux variant. (Centos, RHEL, 
+#   You should probably be on an Enterprise Linux variant. (Centos, RHEL,
 #    Scientific, Oracle, Ascendos, et al)
 #
 # Sample Usage:
@@ -14,7 +14,9 @@
 # If you need them use the classes directly.
 class rpmrepos {
 
-    require rpmrepos::epel
-    require rpmrepos::rpmforge
+    anchor {'rpmrepos::begin':} ->
+    class {'rpmrepos::epel':} ->
+    class {'rpmrepos::rpmforge':} ->
+    anchor {'rpmrepos::end':}
 
 }

@@ -6,3 +6,5 @@ license 'Apache License, Version 2.0'
 summary 'Setup 3rd party RPM repos'
 description 'Setup the various third party repos on Centos/RHEL et all'
 project_page 'http://github.com/metcalfc/puppet-rpmrepos'
+
+dependency 'puppetlabs/stdlib', '>= 2.5.1'
