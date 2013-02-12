@@ -1,8 +1,7 @@
 # History
 
-Michael Stahnke wrote [puppet-module-epel]
-(https://github.com/stahnma/puppet-module-epel). Lee Boynton followed up
-with [puppet-rpmforge](https://github.com/lboynton/puppet-rpmforge)
+Michael Stahnke wrote [puppet-module-epel](https://github.com/stahnma/puppet-module-epel).
+Lee Boynton followed up with [puppet-rpmforge](https://github.com/lboynton/puppet-rpmforge)
 which has a dependancy on `puppet-module-epel` for a fact and rpm key
 importing.
 
