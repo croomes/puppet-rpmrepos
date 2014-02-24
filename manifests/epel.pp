@@ -21,6 +21,18 @@ class rpmrepos::epel ($testing           = '0',
 
     anchor {'rpmrepos::epel::begin':} ->
 
+    file { "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${::os_maj_version}":
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => "puppet:///modules/rpmrepos/RPM-GPG-KEY-EPEL-${::os_maj_version}",
+    } ->
+
+    rpmrepos::rpm_gpg_key{ "EPEL-${::os_maj_version}":
+      path => "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${::os_maj_version}"
+    } ->    
+
     yumrepo { 'epel-testing':
       baseurl        => "http://download.fedora.redhat.com/pub/epel/testing/${::os_maj_version}/${::architecture}",
       failovermethod => 'priority',
@@ -79,18 +91,6 @@ class rpmrepos::epel ($testing           = '0',
       gpgcheck       => '1',
       gpgkey         => "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${::os_maj_version}",
       descr          => "Extra Packages for Enterprise Linux ${::os_maj_version} - ${::architecture} - Source"
-    } ->
-
-    file { "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${::os_maj_version}":
-      ensure => present,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0644',
-      source => "puppet:///modules/rpmrepos/RPM-GPG-KEY-EPEL-${::os_maj_version}",
-    } ->
-
-    rpmrepos::rpm_gpg_key{ "EPEL-${::os_maj_version}":
-      path => "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${::os_maj_version}"
     } ->
 
     anchor {'rpmrepos::epel::end':}
